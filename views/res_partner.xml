@@ -1,0 +1,25 @@
+<odoo>
+    <record id="res_partner_view_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="distance_char" invisible="type != 'delivery'" />
+                <field name="time_char" invisible="type != 'delivery'" />
+                <button name="calculate_distance" string="Calculate Distance" type="object"
+                    class="oe_highlight" invisible="type != 'delivery'" />
+            </xpath>
+            <xpath
+                expr="//notebook/page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group/div/div"
+                position="after">
+                <div invisible="type != 'delivery'">
+                    <field name="distance_char" />
+                    <field name="time_char" />
+                    <button name="calculate_distance" string="Calculate Distance" type="object"
+                        class="oe_highlight" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
