@@ -34,21 +34,5 @@
                 </xpath>
             </field>
         </record>
-
-        <record id="odoo-trip-estimator_config_settings_action" model="ir.actions.act_window">
-            <field name="name">Extra</field>
-            <field name="res_model">res.config.settings</field>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-            <field name="context">{'module': 'odoo-trip-estimator', 'bin_size' : False}</field>
-        </record>
-        <!-- <menuitem name="Configuration" parent="menu_root"
-        id="odoo_trip_estimator_configuration"
-            sequence="100" groups="base.group_system" />
-        <menuitem id="odoo-trip-estimator_config_settings_menu" name="Paramètres"
-            parent="odoo-trip-estimator.odoo-trip-estimator_configuration"
-            action="odoo-trip-estimator_config_settings_action"
-            sequence="10"
-            groups="base.group_system" /> -->
     </data>
 </odoo>

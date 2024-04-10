@@ -14,7 +14,9 @@
                 expr="//notebook/page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group/group/div/div"
                 position="after">
                 <div invisible="type != 'delivery'">
+                    <label for="distance_char" string="Distance" />
                     <field name="distance_char" />
+                    <label for="time_char" string="Time" />
                     <field name="time_char" />
                     <button name="calculate_distance" string="Calculate Distance" type="object"
                         class="oe_highlight" />
