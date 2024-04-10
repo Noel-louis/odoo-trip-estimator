@@ -16,6 +16,11 @@
                 <group invisible="type != 'delivery'">
                     <field name="distance_char" />
                     <field name="time_char" />
+                </group>
+                <!-- give a separation between the button and the field and make them align with
+                everything else -->
+                <group></group>
+                <group>
                     <button name="calculate_distance" string="Calculate Distance" type="object"
                         class="oe_highlight" />
                 </group>
