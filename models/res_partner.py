@@ -9,11 +9,11 @@ class res_partner(models.Model):
     latitude = fields.Float(string="Latitude")
     longitude = fields.Float(string="Longitude")
     distance = fields.Float(string="Distance float")
-    time = fields.Float(string="time float")
+    time = fields.Float(string="Time float")
 
     # printed data
     distance_char = fields.Char(string="Distance", compute="_compute_distance_char")
-    time_char = fields.Char(string="time", compute="_compute_time_char")
+    time_char = fields.Char(string="Time", compute="_compute_time_char")
 
     @api.depends("distance")
     def _compute_distance_char(self):

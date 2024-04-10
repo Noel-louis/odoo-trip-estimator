@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Noel-louis/odoo-trip-estimator">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="static/description/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Odoo-trip-estimator</h3>
@@ -71,28 +71,22 @@ Here are the differents steps to install and use this module.
 
 ### Prerequisites
 
-You'll need to install a new pip package into your Installation or Virtual environment.
-
-- openrouteservice
-  ```sh
-  pip install openrouteservie
-  ```
+For this module to work, you'll need to get an [OpenRouteService APIkey](https://openrouteservice.org/dev/#/home). It is free, open-source and you just need to create an account to use their service.
 
 ### Installation
 
 To install this module into Odoo, follow thes steps.
 
-1. Get a free API Key at [OpenRouteService website](https://openrouteservice.org/dev/#/home)
-2. Clone the repo inside your Odoo installation addons folder
+1. Clone the repo inside your Odoo installation addons folder
    ```sh
    git clone https://github.com/Noel-louis/odoo-trip-estimator
    ```
-3. Install Python packages
+2. Install Python packages for openrouteservice
    ```sh
    pip install -r requirements.txt
    ```
-4. Restart your odoo server and upgrade your module list
-5. Enter your API in the parameter for the module
+3. Restart your odoo server and upgrade your module list
+4. Enter your API in the parameter for the module
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
