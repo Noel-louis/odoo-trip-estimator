@@ -20,7 +20,7 @@
                 <!-- give a separation between the button and the field and make them align with
                 everything else -->
                 <group></group>
-                <group>
+                <group invisible="type != 'delivery'">
                     <button name="calculate_distance" string="Calculate Distance" type="object"
                         class="oe_highlight" />
                 </group>
