@@ -16,7 +16,7 @@
                                 <span>
                                     API key :
                                 </span>
-                                <field name="x_trip_estimator_key"
+                                <field name="x_tripestimator_key"
                                     style="width: 100%; min-width: 4rem;"
                                     placeholder="Your API key" />
                                 <br />
