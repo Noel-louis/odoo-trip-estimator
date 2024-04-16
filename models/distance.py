@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+# _ is used to translate the string in the current language
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 import openrouteservice as ors
@@ -38,7 +39,8 @@ class Distance(models.Model):
             "odoo-trip-estimator.key"
         )
         if not token_api_key:
-            raise UserError("No API key found")
+            error_message = _("No API key found")
+            raise UserError(error_message)
         client = ors.Client(key=token_api_key)
         try:
             direction = client.directions(
@@ -57,4 +59,5 @@ class Distance(models.Model):
             )
             return result
         except ors_exc.ApiError as e:
-            raise UserError(f"Error with the API: {e}")
+            error_message = _("Error with the API: %s", e)
+            raise UserError(error_message)

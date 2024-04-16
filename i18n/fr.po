@@ -1,0 +1,250 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_trip_estimator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-16 12:46+0000\n"
+"PO-Revision-Date: 2024-04-16 14:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid ""
+"<br/>\n"
+"                                    <span>\n"
+"                                        And follow the instruction on the github Readme of the\n"
+"                                        project :\n"
+"                                    </span>"
+msgstr ""
+"<br/>\n"
+"                                    <span>\n"
+"                                        Et suis les instructions sur le Readme du\n"
+"                                        projet :\n"
+"                                    </span>"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid ""
+"<br/>\n"
+"                                    <span>\n"
+"                                        Where to get your API key :\n"
+"                                    </span>"
+msgstr ""
+"<br/>\n"
+"                                    <span>\n"
+"                                        Où trouver votre clé API :\n"
+"                                    </span>"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid ""
+"<span>\n"
+"                                        API key :\n"
+"                                    </span>"
+msgstr ""
+"<span>\n"
+"                                        Clé API :\n"
+"                                    </span>"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "API key settings"
+msgstr "Paramètre de clé API"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__address_contact_id
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__address_contact_ids
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__address_contact_id
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__address_contact_ids
+#, python-format
+msgid "Address Contact"
+msgstr "Adresse du contact"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_partner_view_form
+msgid "Calculate Distance"
+msgstr "calcul de distance"
+
+#. module: odoo_trip_estimator
+#: model:ir.model,name:odoo_trip_estimator.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: odoo_trip_estimator
+#: model:ir.model,name:odoo_trip_estimator.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__distance
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__distance_char
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__distance_char
+#, python-format
+msgid "Distance"
+msgstr "Distance"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__distance
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__distance
+#, python-format
+msgid "Distance float"
+msgstr "Distance flottant"
+
+#. module: odoo_trip_estimator
+#: model:ir.model,name:odoo_trip_estimator.model_distance
+msgid "Distance model for storing distance data"
+msgstr "Modèle Distance pour stocker les données de distance et de temps"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/distance.py:0
+#, python-format
+msgid "Error with the API: %s"
+msgstr "Erreur avec l'API: %s"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "Github Project"
+msgstr "Projet Github"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__id
+msgid "ID"
+msgstr "ID"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__latitude_1
+msgid "Latitude 1"
+msgstr "Latitude 1"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__latitude_2
+msgid "Latitude 2"
+msgstr "Latitude 2"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__longitude_1
+msgid "Longitude 1"
+msgstr "Longitude 1"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__longitude_2
+msgid "Longitude 2"
+msgstr "Longitude 2"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/distance.py:0
+#, python-format
+msgid "No API key found"
+msgstr "Aucune clé API trouvé"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_config_settings__key
+msgid "OpenRouteService API Key"
+msgstr "Clé API OpenRouteService"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "OpenRouteService Api"
+msgstr "API OpenRouteService"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "The address is not geolocalized."
+msgstr "L'adresse n'est pas gélocalisé."
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "The address of the contact is not geolocalized. Please change its address."
+msgstr "L'adresse du contact n'est pas géolocalisé. Veuillez changez son adresse."
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "The addresses are the same. The distance is 0."
+msgstr "Les adresses sont les mêmes. La distance est de 0."
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__time_char
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__time_char
+#, python-format
+msgid "Time"
+msgstr "Temps"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__time
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_users__time
+#, python-format
+msgid "Time float"
+msgstr "Temps flottant"
+
+#. module: odoo_trip_estimator
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__travel_time
+msgid "Travel Time"
+msgstr "Temps de trajet"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "Trip Estimator"
+msgstr "Trip Estimator"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "Trip Estimator Config Settings"
+msgstr "Paramètres de Trip Estimator"
+
+#. module: odoo_trip_estimator
+#: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
+msgid "Your API key"
+msgstr "Votre clé API"

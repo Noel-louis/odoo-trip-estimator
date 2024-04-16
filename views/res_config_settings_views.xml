@@ -14,19 +14,30 @@
                         <block title="Trip Estimator Config Settings" id="trip_settings">
                             <setting string="API key settings">
                                 <div class="text-muted content-group mt-16">
-                                    <span>API key : </span>
+                                    <span>
+                                        API key :
+                                    </span>
                                     <field name="key"
-                                        style="width: 80%; min-width: 4rem;"
+                                        style="width: 100%; min-width: 4rem;"
                                         placeholder="Your API key" />
-                                    <span>Where to get your API key : </span>
+                                    <br />
+                                    <span>
+                                        Where to get your API key :
+                                    </span>
                                     <a
                                         href="https://openrouteservice.org/dev/#/login"
-                                        target="_blank">OpenRouteService Api</a>
+                                        target="_blank">
+                                        OpenRouteService Api
+                                    </a>
                                     <br />
-                                    <span>And follow the instruction on the github Readme of the
-                                        project :</span>
+                                    <span>
+                                        And follow the instruction on the github Readme of the
+                                        project :
+                                    </span>
                                     <a href="https://github.com/Noel-louis/odoo-trip-estimator"
-                                        target="_blank">Github Project</a>
+                                        target="_blank">
+                                        Github Project
+                                    </a>
                                 </div>
                             </setting>
                         </block>

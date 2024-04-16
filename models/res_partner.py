@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+# _ is used to translate the strings in the current language
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -8,19 +9,19 @@ class res_partner(models.Model):
     # starting point for the trip calculation
     address_contact_id = fields.Many2one(
         "res.partner",
-        string="Address Contact",
+        string=_("Address Contact"),
         default=lambda self: self.env.company.partner_id.id,
     )
     address_contact_ids = fields.One2many(
-        "res.partner", "address_contact_id", string="Address Contact"
+        "res.partner", "address_contact_id", string=_("Address Contact")
     )
     # calcul data
-    distance = fields.Float(string="Distance float")
-    time = fields.Float(string="Time float")
+    distance = fields.Float(string=_("Distance float"))
+    time = fields.Float(string=_("Time float"))
 
     # printed data
-    distance_char = fields.Char(string="Distance", compute="_compute_distance_char")
-    time_char = fields.Char(string="Time", compute="_compute_time_char")
+    distance_char = fields.Char(string=_("Distance"), compute="_compute_distance_char")
+    time_char = fields.Char(string=_("Time"), compute="_compute_time_char")
 
     @api.depends("distance")
     def _compute_distance_char(self):
@@ -57,17 +58,20 @@ class res_partner(models.Model):
             ):
                 record.distance = 0
                 record.time = 0
-                raise UserError("The addresses are the same. The distance is 0.")
+                error_message = _("The addresses are the same. The distance is 0.")
+                raise UserError(error_message)
             elif record.partner_latitude == 0 and record.partner_longitude == 0:
-                raise UserError("The address is not geolocalized.")
+                error_message = _("The address is not geolocalized.")
+                raise UserError(error_message)
 
             elif (
                 record.address_contact_id.partner_latitude == 0
                 and record.address_contact_id.partner_longitude == 0
             ):
-                raise UserError(
+                error_message = _(
                     "The address of the contact is not geolocalized. Please change its address."
                 )
+                raise UserError(error_message)
             else:
                 dist = record.env["distance"].compute_distance(
                     record.partner_latitude,
