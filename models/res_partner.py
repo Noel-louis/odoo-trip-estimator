@@ -1,13 +1,20 @@
 from odoo import api, fields, models
-from . import geocode
+from odoo.exceptions import UserError
 
 
 class res_partner(models.Model):
     _inherit = "res.partner"
 
+    # starting point for the trip calculation
+    address_contact_id = fields.Many2one(
+        "res.partner",
+        string="Address Contact",
+        default=lambda self: self.env.company.partner_id.id,
+    )
+    address_contact_ids = fields.One2many(
+        "res.partner", "address_contact_id", string="Address Contact"
+    )
     # calcul data
-    latitude = fields.Float(string="Latitude")
-    longitude = fields.Float(string="Longitude")
     distance = fields.Float(string="Distance float")
     time = fields.Float(string="Time float")
 
@@ -39,47 +46,46 @@ class res_partner(models.Model):
 
     def calculate_distance(self):
         for record in self:
-            # create an address for the contact without the name for geolocation
-            adresse = ""
-            for elem in [
-                record.street,
-                record.street2,
-                record.city,
-                record.state_id.name,
-                record.zip,
-                record.country_id.name,
-            ]:
-                if elem:
-                    adresse = adresse + elem + ", "
-            adresse = adresse[:-2]
-            geo = self.env["geocode"].geocode_address(adresse)
-            record.latitude = geo.latitude
-            record.longitude = geo.longitude
-
-            # create an address for the company without the name for geolocation
-            company = self.env.company
-            adresse_company = ""
-            for elem in [
-                company.partner_id.street,
-                company.partner_id.street2,
-                company.partner_id.city,
-                company.partner_id.state_id.name,
-                company.partner_id.zip,
-                company.partner_id.country_id.name,
-            ]:
-                if elem:
-                    adresse_company = adresse_company + elem + ", "
-            adresse_company = adresse_company[:-2]
-
-            # calculate the geolocation of the company
-            geo_company = self.env["geocode"].geocode_address(adresse_company)
+            # use the geolocation of the contact if it exists or calculate it using the module geolocate
+            record.geo_localize()
+            record.address_contact_id.geo_localize()
             # calculate the distance and the time between the contact and the company
-            dist = self.env["distance"].compute_distance(
-                record.latitude,
-                record.longitude,
-                geo_company.latitude,
-                geo_company.longitude,
-            )
-            # set the values of the fields
-            record.distance = dist.distance
-            record.time = dist.travel_time
+            if (
+                record.partner_latitude == record.address_contact_id.partner_latitude
+                and record.partner_longitude
+                == record.address_contact_id.partner_longitude
+            ):
+                record.distance = 0
+                record.time = 0
+                raise UserError("The addresses are the same. The distance is 0.")
+            elif record.partner_latitude == 0 and record.partner_longitude == 0:
+                raise UserError("The address is not geolocalized.")
+
+            elif (
+                record.address_contact_id.partner_latitude == 0
+                and record.address_contact_id.partner_longitude == 0
+            ):
+                raise UserError(
+                    "The address of the contact is not geolocalized. Please change its address."
+                )
+            else:
+                dist = record.env["distance"].compute_distance(
+                    record.partner_latitude,
+                    record.partner_longitude,
+                    record.address_contact_id.partner_latitude,
+                    record.address_contact_id.partner_longitude,
+                )
+                # set the values of the fields
+                record.distance = dist.distance
+                record.time = dist.travel_time
+
+    @api.depends("address_contact_ids")
+    def _compute_address_id(self):
+        for record in self:
+            if record.address_contact_ids:
+                record.address_contact_id = record.address_contact_ids[0].id
+
+    def _inverse_address_id(self):
+        for record in self:
+            if record.address_contact_id:
+                record.address_contact_ids = [(4, record.address_contact_id.id)]

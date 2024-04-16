@@ -2,25 +2,27 @@
     <record id="res_partner_view_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="inherit_id" ref="base_geolocalize.view_crm_partner_geo_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='category_id']" position="after">
-                <field name="distance_char" invisible="type != 'delivery'" />
-                <field name="time_char" invisible="type != 'delivery'" />
+            <xpath expr="//notebook/page[@name='geo_location']/group/group" position="inside">
+                <field name="address_contact_id" />
+                <field name="distance_char" />
+                <field name="time_char" />
                 <button name="calculate_distance" string="Calculate Distance" type="object"
-                    class="oe_highlight" invisible="type != 'delivery'" />
+                    class="oe_highlight" />
             </xpath>
             <xpath
                 expr="//notebook/page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group"
                 position="inside">
-                <group invisible="type != 'delivery'">
+                <group>
+                    <field name="address_contact_id" />
                     <field name="distance_char" />
                     <field name="time_char" />
                 </group>
                 <!-- give a separation between the button and the field and make them align with
                 everything else -->
                 <group></group>
-                <group invisible="type != 'delivery'">
+                <group>
                     <button name="calculate_distance" string="Calculate Distance" type="object"
                         class="oe_highlight" />
                 </group>

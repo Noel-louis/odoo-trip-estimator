@@ -6,7 +6,7 @@
     """,
     "author": "Louis Noël",
     "version": "0.1",
-    "depends": ["base", "contacts"],
+    "depends": ["base", "contacts", "base_geolocalize"],
     "installable": True,
     "application": True,
     "data": [
