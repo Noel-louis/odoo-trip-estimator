@@ -1,6 +1,9 @@
 # _ is used to translate the strings in the current language
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class res_partner(models.Model):
@@ -46,8 +49,10 @@ class res_partner(models.Model):
                 record.time_char = "{:.0f} min".format(minutes)
 
     def calculate_distance(self):
+        same_address = False
+        address_not_geolocalized = False
+        contact_not_geolocalized = False
         for record in self:
-            # use the geolocation of the contact if it exists or calculate it using the module geolocate
             record.geo_localize()
             record.address_contact_id.geo_localize()
             # calculate the distance and the time between the contact and the company
@@ -58,20 +63,14 @@ class res_partner(models.Model):
             ):
                 record.distance = 0
                 record.time = 0
-                error_message = _("The addresses are the same. The distance is 0.")
-                raise UserError(error_message)
+                same_address = True
             elif record.partner_latitude == 0 and record.partner_longitude == 0:
-                error_message = _("The address is not geolocalized.")
-                raise UserError(error_message)
-
+                address_not_geolocalized = True
             elif (
                 record.address_contact_id.partner_latitude == 0
                 and record.address_contact_id.partner_longitude == 0
             ):
-                error_message = _(
-                    "The address of the contact is not geolocalized. Please change its address."
-                )
-                raise UserError(error_message)
+                contact_not_geolocalized = True
             else:
                 dist = record.env["distance"].compute_distance(
                     record.partner_latitude,
@@ -83,6 +82,63 @@ class res_partner(models.Model):
                 record.distance = dist.distance
                 record.time = dist.travel_time
 
+        if self.__len__() == 1:
+            error_message = ""
+            if address_not_geolocalized:
+                error_message = _("The address of the contact is not geolocalized.")
+            if contact_not_geolocalized:
+                error_message = _(
+                    "The address of the starting point is not geolocalized."
+                )
+            if same_address:
+                error_message = _("Both addresses are the same.")
+            if error_message:
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id,
+                    "simple_notification",
+                    {
+                        "type": "warning",
+                        "title": _("Warning"),
+                        "message": error_message,
+                    },
+                )
+        else:
+            if address_not_geolocalized:
+                error_message = _("Some addresses are not geolocalized.")
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id,
+                    "simple_notification",
+                    {
+                        "type": "warning",
+                        "title": _("Warning"),
+                        "message": error_message,
+                    },
+                )
+            if contact_not_geolocalized:
+                error_message = _("Some starting points are not geolocalized.")
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id,
+                    "simple_notification",
+                    {
+                        "type": "warning",
+                        "title": _("Warning"),
+                        "message": error_message,
+                    },
+                )
+            if same_address:
+                error_message = _(
+                    "Some addresses between contact and starting point are the same."
+                )
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id,
+                    "simple_notification",
+                    {
+                        "type": "warning",
+                        "title": _("Warning"),
+                        "message": error_message,
+                    },
+                )
+
     @api.depends("address_contact_ids")
     def _compute_address_id(self):
         for record in self:
@@ -93,3 +149,41 @@ class res_partner(models.Model):
         for record in self:
             if record.address_contact_id:
                 record.address_contact_ids = [(4, record.address_contact_id.id)]
+
+    def make_address_inline(self):
+        adresse = ""
+        for elem in [
+            self.street,
+            self.street2,
+            self.city,
+            self.state_id.name,
+            self.zip,
+            self.country_id.name,
+        ]:
+            if elem:
+                adresse = adresse + elem + ", "
+        adresse = adresse[:-2]
+        return adresse
+
+    def geo_localize(self):
+        for record in self:
+            adresse = record.make_address_inline()
+
+            geocode = self.env["geocode"]
+            if geocode.is_already_geolocalized(adresse):
+                _logger.debug("The address is already geolocalized")
+                geocode = geocode.search([("address", "=", adresse)])[0]
+                record.partner_latitude = geocode.latitude
+                record.partner_longitude = geocode.longitude
+            else:
+                _logger.debug(
+                    "The address is not geolocalized, calling the super method"
+                )
+                super(res_partner, record).geo_localize()
+                geocode.create(
+                    {
+                        "latitude": record.partner_latitude,
+                        "longitude": record.partner_longitude,
+                        "address": adresse,
+                    }
+                )

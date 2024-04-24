@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 12:46+0000\n"
-"PO-Revision-Date: 2024-04-16 14:48+0200\n"
+"POT-Creation-Date: 2024-04-24 10:24+0000\n"
+"PO-Revision-Date: 2024-04-24 12:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -63,6 +63,14 @@ msgstr "Paramètre de clé API"
 
 #. module: odoo_trip_estimator
 #. odoo-python
+#: code:addons/odoo_trip_estimator/models/geocode.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__address
+#, python-format
+msgid "Address"
+msgstr "Adresse"
+
+#. module: odoo_trip_estimator
+#. odoo-python
 #: code:addons/odoo_trip_estimator/models/res_partner.py:0
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__address_contact_id
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_res_partner__address_contact_ids
@@ -73,9 +81,17 @@ msgid "Address Contact"
 msgstr "Adresse du contact"
 
 #. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "Both addresses are the same."
+msgstr "Les 2 adresses sont les mêmes."
+
+#. module: odoo_trip_estimator
+#: model:ir.actions.server,name:odoo_trip_estimator.action_calculate_distance
 #: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_partner_view_form
 msgid "Calculate Distance"
-msgstr "calcul de distance"
+msgstr "Calcul de distance"
 
 #. module: odoo_trip_estimator
 #: model:ir.model,name:odoo_trip_estimator.model_res_config_settings
@@ -89,16 +105,19 @@ msgstr "Contact"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__create_uid
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__create_date
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__display_name
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__display_name
 msgid "Display Name"
 msgstr "Nom d'affichage"
 
@@ -134,34 +153,63 @@ msgid "Error with the API: %s"
 msgstr "Erreur avec l'API: %s"
 
 #. module: odoo_trip_estimator
+#: model:ir.actions.server,name:odoo_trip_estimator.action_geo_localise
+msgid "Geo Localise"
+msgstr "Géolocaliser"
+
+#. module: odoo_trip_estimator
+#: model:ir.model,name:odoo_trip_estimator.model_geocode
+msgid "Geocode"
+msgstr "Géocoder"
+
+#. module: odoo_trip_estimator
 #: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
 msgid "Github Project"
 msgstr "Projet Github"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__id
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__id
 msgid "ID"
 msgstr "ID"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__write_uid
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__write_date
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/geocode.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__latitude
+#, python-format
+msgid "Latitude"
+msgstr "Latitude"
+
+#. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__latitude_1
 msgid "Latitude 1"
-msgstr "Latitude 1"
+msgstr "Latitude1"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__latitude_2
 msgid "Latitude 2"
 msgstr "Latitude 2"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/geocode.py:0
+#: model:ir.model.fields,field_description:odoo_trip_estimator.field_geocode__longitude
+#, python-format
+msgid "Longitude"
+msgstr "Longitude"
 
 #. module: odoo_trip_estimator
 #: model:ir.model.fields,field_description:odoo_trip_estimator.field_distance__longitude_1
@@ -194,22 +242,36 @@ msgstr "API OpenRouteService"
 #. odoo-python
 #: code:addons/odoo_trip_estimator/models/res_partner.py:0
 #, python-format
-msgid "The address is not geolocalized."
-msgstr "L'adresse n'est pas gélocalisé."
+msgid "Some addresses are not geolocalized."
+msgstr "Certaines adresses ne sont pas localisés."
 
 #. module: odoo_trip_estimator
 #. odoo-python
 #: code:addons/odoo_trip_estimator/models/res_partner.py:0
 #, python-format
-msgid "The address of the contact is not geolocalized. Please change its address."
-msgstr "L'adresse du contact n'est pas géolocalisé. Veuillez changez son adresse."
+msgid "Some addresses between contact and starting point are the same."
+msgstr "Certaines adresses sont les mêmes pour le point de départ et d'arrivée."
 
 #. module: odoo_trip_estimator
 #. odoo-python
 #: code:addons/odoo_trip_estimator/models/res_partner.py:0
 #, python-format
-msgid "The addresses are the same. The distance is 0."
-msgstr "Les adresses sont les mêmes. La distance est de 0."
+msgid "Some starting points are not geolocalized."
+msgstr "Certains points de départ ne sont pas localisés."
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "The address of the contact is not geolocalized."
+msgstr "L'adresse du contact n'est pas localisée."
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "The address of the starting point is not geolocalized."
+msgstr "L'adresse du point de départ n'est pas localisée."
 
 #. module: odoo_trip_estimator
 #. odoo-python
@@ -243,6 +305,13 @@ msgstr "Trip Estimator"
 #: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form
 msgid "Trip Estimator Config Settings"
 msgstr "Paramètres de Trip Estimator"
+
+#. module: odoo_trip_estimator
+#. odoo-python
+#: code:addons/odoo_trip_estimator/models/res_partner.py:0
+#, python-format
+msgid "Warning"
+msgstr "Attention"
 
 #. module: odoo_trip_estimator
 #: model_terms:ir.ui.view,arch_db:odoo_trip_estimator.res_config_settings_view_form

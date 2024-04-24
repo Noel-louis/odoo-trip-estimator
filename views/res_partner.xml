@@ -1,4 +1,26 @@
 <odoo>
+    <record id="action_geo_localise" model="ir.actions.server">
+        <field name="name">Geo Localise</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field name="binding_model_id" ref="model_res_partner" />
+        <field name="state">code</field>
+        <field name="code">
+            records.geo_localize()
+        </field>
+    </record>
+
+    <record id="action_calculate_distance" model="ir.actions.server">
+        <field name="name">Calculate Distance</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_res_partner" />
+        <field name="binding_model_id" ref="model_res_partner" />
+        <field name="state">code</field>
+        <field name="code">
+            records.calculate_distance()
+        </field>
+    </record>
+
     <record id="res_partner_view_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
