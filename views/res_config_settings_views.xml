@@ -7,17 +7,17 @@
             <field name="inherit_id" ref="base.res_config_settings_view_form" />
             <field name="arch" type="xml">
                 <xpath expr="//form" position="inside">
-                    <app data-string="odoo-trip-estimator" string="Trip Estimator"
-                        id="odoo-trip-estimator"
-                        name="odoo-trip-estimator" groups="base.group_system"
-                        data-key="odoo-trip-estimator">
+                    <app data-string="odoo_trip_estimator" string="Trip Estimator"
+                        id="odoo_trip_estimator"
+                        name="odoo_trip_estimator" groups="base.group_system"
+                        data-key="odoo_trip_estimator">
                         <block title="Trip Estimator Config Settings" id="trip_settings">
                             <setting string="API key settings">
                                 <div class="text-muted content-group mt-16">
                                     <span>
                                         API key :
                                     </span>
-                                    <field name="key"
+                                    <field name="x_tripestimator_key"
                                         style="width: 100%; min-width: 4rem;"
                                         placeholder="Your API key" />
                                     <br />
@@ -28,15 +28,6 @@
                                         href="https://openrouteservice.org/dev/#/login"
                                         target="_blank">
                                         OpenRouteService Api
-                                    </a>
-                                    <br />
-                                    <span>
-                                        And follow the instruction on the github Readme of the
-                                        project :
-                                    </span>
-                                    <a href="https://github.com/Noel-louis/odoo-trip-estimator"
-                                        target="_blank">
-                                        Github Project
                                     </a>
                                 </div>
                             </setting>
