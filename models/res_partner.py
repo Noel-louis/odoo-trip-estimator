@@ -12,13 +12,13 @@ class res_partner(models.Model):
     # starting point for the trip calculation
     x_tripestimator_contact_starting_point = fields.Many2one(
         "res.partner",
-        string=_("Address Contact"),
+        string=_("Starting Point"),
         default=lambda self: self.env.company.partner_id.id,
     )
     x_tripestimator_contact_starting_points = fields.One2many(
         "res.partner",
         "x_tripestimator_contact_starting_point",
-        string=_("Address Contact"),
+        string=_("Starting Point"),
     )
 
     # calcul data
