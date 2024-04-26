@@ -187,3 +187,8 @@ class res_partner(models.Model):
                         "address": adresse,
                     }
                 )
+
+    def create(self, values):
+        res = super(res_partner, self).create(values)
+        res.calculate_distance()
+        return res
