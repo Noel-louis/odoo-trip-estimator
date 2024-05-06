@@ -35,8 +35,8 @@ class Distance(models.Model):
         if dist:
             return dist
         # create the client to interact with the OpenRouteService API
-        token_api_key = self.env["ir.config_parameter"].get_param(
-            "odoo-trip-estimator.key"
+        token_api_key = (
+            self.env["ir.config_parameter"].sudo().get_param("odoo-trip-estimator.key")
         )
         if not token_api_key:
             error_message = _("No API key found")
