@@ -49,6 +49,7 @@ class Distance(models.Model):
                 coordinates=[[longitude_1, latitude_1], [longitude_2, latitude_2]],
                 profile="driving-car",
                 radiuses=[-1],
+                radiuses=[-1],
             )
             # Add the distance and the travel time in the database
             result = self.env["distance"].create(
