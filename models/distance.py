@@ -48,6 +48,7 @@ class Distance(models.Model):
             direction = client.directions(
                 coordinates=[[longitude_1, latitude_1], [longitude_2, latitude_2]],
                 profile="driving-car",
+                radiuses=[-1],
             )
             # Add the distance and the travel time in the database
             result = self.env["distance"].create(
@@ -68,4 +69,46 @@ class Distance(models.Model):
         except ors_exc.ApiError as e:
             # if there is an error with the API, we raise an error to inform the user
             error_message = _("Error with the API: %s", e)
+            if e.status == 400:
+                error_message = _(
+                    "The request was malformed. Please check the parameters."
+                )
+            if e.status == 403:
+                error_message = _(
+                    "The request is not authorized. Please check the API key."
+                )
+            if e.status == 404:
+                error_message = _(
+                    "The server couldn't find the a street at the address. Please check the address."
+                )
+            if e.status == 405:
+                error_message = _(
+                    "There was an error with the request method. Please check the parameters. Otherwise report the issue."
+                )
+            if e.status == 413:
+                error_message = _(
+                    "The request is too large. Please reduce the number of waypoints."
+                )
+            if e.status == 500:
+                error_message = _("The server encountered an error. Please try again.")
+            if e.status == 501:
+                error_message = _(
+                    "The server does not support the functionality. Please report the issue."
+                )
+            if e.status == 503:
+                error_message = _(
+                    "The server is currently unavailable. Please try again later."
+                )
+
+            raise UserError(error_message)
+        except ors_exc.HTTPError as e:
+            error_message = _(
+                "There was an error with the HTTP request,\nplease retry later or report to the administrator",
+            )
+            raise UserError(error_message)
+        except Exception as e:
+            error_message = _(
+                "There was an unexpected error,\nplease retry later or report to the administrator :\n%s",
+                e,
+            )
             raise UserError(error_message)
