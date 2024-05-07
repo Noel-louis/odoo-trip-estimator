@@ -111,3 +111,14 @@ class Distance(models.Model):
                 e,
             )
             raise UserError(error_message)
+        except ors_exc.HTTPError as e:
+            error_message = _(
+                "There was an error with the HTTP request,\nplease retry later or report to the administrator",
+            )
+            raise UserError(error_message)
+        except Exception as e:
+            error_message = _(
+                "There was an unexpected error,\nplease retry later or report to the administrator :\n%s",
+                e,
+            )
+            raise UserError(error_message)
