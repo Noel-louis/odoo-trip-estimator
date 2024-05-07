@@ -99,7 +99,6 @@ class Distance(models.Model):
                 error_message = _(
                     "The server is currently unavailable. Please try again later."
                 )
-
             raise UserError(error_message)
         except ors_exc.HTTPError as e:
             error_message = _(
